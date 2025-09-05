@@ -21,12 +21,12 @@ import { RolesGuard } from './common/guards/roles.guard';
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) =>
+      useFactory: () =>
         ({
           type: 'postgres',
-          url: config.DB_URL,
+          url: config.DB_URL.replace('postgresql://', 'postgres://'), // ✅ Render fix
           entities: [__dirname + '/**/*.entity{.ts,.js}'],
-          synchronize: config.NODE_ENV !== 'production',
+          synchronize: true, // ✅ jadvalni avtomatik yaratadi (faqat dev/prod boshida)
           ssl:
             config.NODE_ENV === 'production'
               ? { rejectUnauthorized: false }
