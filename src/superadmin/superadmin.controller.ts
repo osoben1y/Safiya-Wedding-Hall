@@ -1,18 +1,13 @@
 import { Controller, Get, Body, Patch, Param } from '@nestjs/common';
 import { SuperadminService } from './superadmin.service';
-import { RegisterSuperadminDto } from './dto/register-superadmin.dto';
 import { LoginSuperadminDto } from './dto/login-superadmin.dto';
-import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { Roles } from '../common/decorator/roles.decorator';
-import { RolesGuard } from '../common/guards/roles.guard';
 import { Role } from '../common/enum/user-enum';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Superadmin')
 @ApiBearerAuth()
 @Controller('superadmin')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
 export class SuperadminController {
   constructor(private readonly superadminService: SuperadminService) {}
 

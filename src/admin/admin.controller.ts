@@ -18,16 +18,12 @@ import {
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
-import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { Roles } from '../common/decorator/roles.decorator';
-import { RolesGuard } from '../common/guards/roles.guard';
 import { Role } from '../common/enum/user-enum';
 
 @ApiTags('Admin')
 @ApiBearerAuth()
 @Controller('admin')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 

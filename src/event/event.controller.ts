@@ -11,8 +11,6 @@ import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody, ApiBearerAuth } 
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
-import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { Roles } from '../common/decorator/roles.decorator';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Role } from '../common/enum/user-enum';
@@ -20,7 +18,6 @@ import { Role } from '../common/enum/user-enum';
 @ApiTags('Events')
 @ApiBearerAuth()
 @Controller('event')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
 export class EventController {
   constructor(private readonly eventService: EventService) {}
 
